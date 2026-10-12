@@ -1,0 +1,4 @@
+# Start command for Nixpacks. The app listens on 3000 by default (the default
+# container port of a Dokploy domain); set PORT to change it.
+[start]
+cmd = "gunicorn app:app --bind 0.0.0.0:${PORT:-3000} --workers 2"

@@ -1,0 +1,24 @@
+# Local test only. Run from the repository root:
+#   docker compose -f dev/docker-compose.yml up
+# Then open http://localhost:3000/ , /health and /visits. If port 3000 is busy:
+#   HOST_PORT=3300 docker compose -f dev/docker-compose.yml up
+# (This repository has no Dockerfile on purpose: Nixpacks builds it on the pool.)
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: local-test-only
+  app:
+    image: python:3.12-slim
+    working_dir: /app
+    volumes:
+      - ..:/app
+    command: sh -c "pip install -q -r requirements.txt && gunicorn app:app --bind 0.0.0.0:3000"
+    environment:
+      DATABASE_URL: postgresql://app:local-test-only@db:5432/app
+    ports:
+      - "${HOST_PORT:-3000}:3000"
+    depends_on:
+      - db
