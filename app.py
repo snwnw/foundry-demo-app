@@ -6,7 +6,7 @@ import psycopg
 from flask import Flask, jsonify
 
 # To show a deploy or a preview, change one of these two lines and push.
-APP_VERSION = "v3"
+APP_VERSION = "v4"
 BG_COLOR = "#1e40af"
 
 app = Flask(__name__)
