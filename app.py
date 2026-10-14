@@ -7,7 +7,7 @@ from flask import Flask, jsonify
 
 # To show a deploy or a preview, change one of these two lines and push.
 APP_VERSION = "v5"
-BG_COLOR = "#b91c1c"
+BG_COLOR = "#15803d"
 
 app = Flask(__name__)
 
