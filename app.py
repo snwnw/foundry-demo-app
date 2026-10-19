@@ -59,7 +59,31 @@ def visits():
                 "INSERT INTO visits (id, n) VALUES (1, 1) "
                 "ON CONFLICT (id) DO UPDATE SET n = visits.n + 1 RETURNING n"
             ).fetchone()
-        return jsonify(visits=row[0])
+        return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visits</title>
+  <style>
+    body {{ margin: 0; min-height: 100vh; display: grid; place-items: center;
+           background: #071f2a; color: #f0f4f2; font-family: system-ui, sans-serif; }}
+    .card {{ background: #0c3549; border: 1px solid #1f4557; border-radius: 8px;
+            padding: 32px 56px; text-align: center; }}
+    .label {{ color: #4dd47a; font: 12px ui-monospace, monospace;
+             letter-spacing: .16em; text-transform: uppercase; }}
+    .n {{ font-size: 5rem; font-weight: 700; margin: 8px 0 0; }}
+    .db {{ color: #8fa6ae; margin: 0; }}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="label">FlowForge &middot; Visits</div>
+    <p class="n">{row[0]}</p>
+    <p class="db">stored in PostgreSQL</p>
+  </main>
+</body>
+</html>"""
     except psycopg.Error as exc:
         # The real error goes to the app log; the public answer stays generic.
         app.logger.error("database error: %s", str(exc).strip())
