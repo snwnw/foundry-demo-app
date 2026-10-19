@@ -68,12 +68,12 @@ def visits():
   <style>
     body {{ margin: 0; min-height: 100vh; display: grid; place-items: center;
            background: #071f2a; color: #f0f4f2; font-family: system-ui, sans-serif; }}
-    .card {{ background: #0c3549; border: 1px solid #1f4557; border-radius: 8px;
-            padding: 32px 56px; text-align: center; }}
-    .label {{ color: #4dd47a; font: 12px ui-monospace, monospace;
+    .card {{ background: #0c3549; border: 1px solid #1f4557; border-radius: 14px;
+            width: min(62vw, 1000px); min-width: 300px; padding: 6vh 32px; text-align: center; }}
+    .label {{ color: #4dd47a; font: clamp(14px, 1.6vw, 26px) ui-monospace, monospace;
              letter-spacing: .16em; text-transform: uppercase; }}
-    .n {{ font-size: 5rem; font-weight: 700; margin: 8px 0 0; }}
-    .db {{ color: #8fa6ae; margin: 0; }}
+    .n {{ font-size: clamp(6rem, 16vw, 18rem); font-weight: 700; line-height: 1.05; margin: 2vh 0 0; }}
+    .db {{ color: #8fa6ae; margin: 0; font-size: clamp(1.1rem, 2.2vw, 2.4rem); }}
   </style>
 </head>
 <body>
